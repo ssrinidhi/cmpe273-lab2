@@ -30,24 +30,30 @@ Login.prototype.login = function(_name, _email) {
 	* Generate unique session id and set it into sessionMap like foo@bar.com
 	*/
 	var sessionId = new Date().getTime();
-	this.sessionMap[sessionId] = { name: _name, email: _email } 
-	
+	this.sessionMap[sessionId] = { name: _name, email: _email }
+
 	console.log('new session id ' + sessionId + ' for login::' + _email);
-	
+
 	return sessionId;
 };
 
 /**
  * Logout from the server
- */ 
+ */
 Login.prototype.logout = function(sessionId) {
 	console.log('logout::' + sessionId);
-	this.sessionMap[sessionId] = "";
-	
-	delete this.sessionId;
-   /*
-	* TODO: Remove the given sessionId from the sessionMap
-	*/
+	delete this.sessionMap[sessionId];
+};
+
+Login.prototype.getName = function(sessionId)
+{
+	 return this.sessionMap[sessionId].name;
+};
+
+
+Login.prototype.getEmail = function(sessionId)
+{
+	 return this.sessionMap[sessionId].email;
 };
 
 // Export the Login class
